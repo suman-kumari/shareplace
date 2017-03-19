@@ -1,0 +1,23 @@
+<script src="http://maps.google.com/maps/api/js?v=3&amp;key=AIzaSyDHpzc5r9heJlEUMWUh_N7GR2W3__e3m9o"></script>
+<script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+
+<h1>Listing Shared Places</h1>
+
+<% if @share_places.present? %>
+  <div style='width: 800px;'>
+    <div id="map" style='width: 800px; height: 400px;'></div>
+  </div>
+<% else %>
+  <p>No places shared yet.</p>
+<% end %>
+
+<%= link_to 'Back', root_path, class: 'btn btn-primary back-link' %>
+
+<script type='text/javascript'>
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+  });
+</script>

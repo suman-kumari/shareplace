@@ -1,0 +1,14 @@
+<h1>Share My Place</h1>
+
+<div id="share-place-form">
+  <%= form_for @share_place, url: user_share_places_path(current_user, place_id: params[:place_id]), method: :post do |f| %>
+    <%= render 'shared/error_messages', obj: @share_place %>
+
+    <div class="form-group">
+      <%= f.label :friend_id, 'Friend' %>
+      <%= f.select :friend_id, options_for_select(current_user.friends.collect { |f| [f.name, f.id] }), { prompt: "Select friends to share with ..." }, { class: "form-control" } %>
+    </div>
+
+    <%= f.submit 'Share', class: 'btn btn-primary' %>
+    <% end %>
+</div>

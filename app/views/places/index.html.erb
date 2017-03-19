@@ -1,0 +1,16 @@
+<div class="jumbotron center">
+  <h1>Welcome!</h1>
+  <p>Add Places to share with your friends.</p>
+  <p>
+    <%= link_to 'Add New place', new_place_path, class: 'btn btn-primary btn-lg' %>
+  </p>
+</div>
+
+<% if @places.present? %>
+  <div class="card">
+    <h2>Listing Places to be shared:</h2>
+    <ul>
+      <%= render @places %>
+    </ul>
+  </div>
+<% end %>
